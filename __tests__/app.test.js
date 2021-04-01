@@ -7,4 +7,22 @@ describe('postgreSQL-vs routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
+  // beforeEach(() => {
+    
+  // });
+
+  it('creates a new ultramarathon in the table', async() => {
+    const data = await request(app)
+      .post('/api/v1/races')
+      .send({
+        name: 'Badwater 135',
+        location: 'Death Valley',
+        distance: 135
+      });
+    expect(data.body).toEqual({
+      name: 'Badwater 135',
+      location: 'Death Valley',
+      distance: 135
+    })
+  })
 });

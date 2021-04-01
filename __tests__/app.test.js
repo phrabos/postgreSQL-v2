@@ -47,4 +47,29 @@ describe('postgreSQL-vs routes', () => {
       },
       ])
   })
+  it('gets a single ultramarathon by id from the table', async() => {
+    const data = await request(app)
+      .get('/api/v1/races/2')
+
+    expect(data.body).toEqual(
+      {
+      name: expect.any(String),
+      location: expect.any(String),
+      distance: expect.any(Number)
+      },
+      )
+  })
+  it('updates a single ultramarathon by id in the table', async() => {
+    const data = await request(app)
+      .put('/api/v1/races/2')
+      .send({name: 'Hard Rock', location: 'Silverton, CO', distance: 100})
+
+    expect(data.body).toEqual(
+      {
+      name: expect.any(String),
+      location: expect.any(String),
+      distance: expect.any(Number)
+      },
+      )
+  })
 });

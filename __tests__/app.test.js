@@ -72,4 +72,16 @@ describe('postgreSQL-vs routes', () => {
       },
       )
   })
+  it('deletes a single ultramarathon by id in the table', async() => {
+    const data = await request(app)
+      .delete('/api/v1/races/2')
+
+    expect(data.body).toEqual(
+      {
+      name: expect.any(String),
+      location: expect.any(String),
+      distance: expect.any(Number)
+      },
+      )
+  })
 });

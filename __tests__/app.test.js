@@ -4,6 +4,12 @@ const request = require('supertest');
 const app = require('../lib/app');
 const RaceService = require('../lib/services/RaceService');
 
+jest.mock('twilio', () => () => ({
+  messages: {
+    create: jest.fn(),
+  },
+}));
+
 describe('postgreSQL-vs routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -11,6 +17,7 @@ describe('postgreSQL-vs routes', () => {
   beforeEach(() => {
     RaceService.addRace('Pinellas Trail Challenge', 'St. Pete, FL', 46)
     RaceService.addRace('Daytona 100', 'Daytona Beach, FL', 100)
+    RaceService.addRace('Badwater 135', 'Death Valley', 135)
   });
 
   it('creates a new ultramarathon in the table', async() => {
@@ -38,6 +45,12 @@ describe('postgreSQL-vs routes', () => {
       name: expect.any(String),
       location: expect.any(String),
       distance: expect.any(Number)
+      },
+      {
+        id: expect.any(String),
+        name: expect.any(String),
+        location: expect.any(String),
+        distance: expect.any(Number)
       },
       {
         id: expect.any(String),

@@ -22,7 +22,7 @@ addRaceButton.addEventListener('click', async () => {
 
   const arr = await fetchAllRaces()
   while (ul.firstChild){ul.removeChild(ul.firstChild)}
-  createList(arr, ul);
+  createList(arr, ul)
   nameInput.value = '';
   locationInput.value = '';
   distanceInput.value = '';

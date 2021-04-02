@@ -1,7 +1,7 @@
 const app = require('./lib/app');
 const pool = require('./lib/utils/pool');
 
-const PORT = process.env.PORT || 7898;
+const PORT = process.env.PORT || 7997;
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
@@ -11,4 +11,8 @@ app.listen(PORT, () => {
 process.on('exit', () => {
   console.log('Goodbye!');
   pool.end();
+});
+process.on('SIGTERM', () => {
+  console.log('Goodbye!');
+  process.exit();
 });
